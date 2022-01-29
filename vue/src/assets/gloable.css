@@ -13,3 +13,8 @@
 .pd-10 {
     padding: 10px 0;
 }
+
+a {
+    text-decoration: none;
+    color: #666;
+}
