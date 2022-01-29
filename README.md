@@ -4,7 +4,7 @@
 
 SpringBoot2 + Vue2 + ElementUI + Axios + Hutool + Mysql
 
-## 交流群
+## 交流QQ群
 
  **529910361** 
 
