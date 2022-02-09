@@ -114,6 +114,7 @@ public class UserController {
         if (!"".equals(address)) {
             queryWrapper.like("address", address);
         }
+
         return Result.success(userService.page(new Page<>(pageNum, pageSize), queryWrapper));
     }
 

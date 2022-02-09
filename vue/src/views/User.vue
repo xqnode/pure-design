@@ -143,7 +143,7 @@ export default {
       this.form = {}
     },
     handleEdit(row) {
-      this.form = row
+      this.form = JSON.parse(JSON.stringify(row))
       this.dialogFormVisible = true
     },
     del(id) {
