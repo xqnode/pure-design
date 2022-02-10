@@ -6,7 +6,8 @@
       <el-button type="warning" @click="reset">重置</el-button>
     </div>
     <div style="margin: 10px 0">
-      <el-upload action="http://localhost:9090/file/upload" :show-file-list="false" :on-success="handleFileUploadSuccess" style="display: inline-block">
+      <el-upload action="http://localhost:9090/file/upload" :show-file-list="false"
+                 :on-success="handleFileUploadSuccess" style="display: inline-block">
         <el-button type="primary" class="ml-5">上传文件 <i class="el-icon-top"></i></el-button>
       </el-upload>
       <el-popconfirm
@@ -22,12 +23,18 @@
       </el-popconfirm>
 
     </div>
-    <el-table :data="tableData" border stripe :header-cell-class-name="'headerBg'"  @selection-change="handleSelectionChange">
+    <el-table :data="tableData" border stripe :header-cell-class-name="'headerBg'"
+              @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55"></el-table-column>
       <el-table-column prop="id" label="ID" width="80"></el-table-column>
       <el-table-column prop="name" label="文件名称"></el-table-column>
       <el-table-column prop="type" label="文件类型"></el-table-column>
       <el-table-column prop="size" label="文件大小(kb)"></el-table-column>
+      <el-table-column label="预览">
+        <template slot-scope="scope">
+          <el-button type="primary" @click="preview(scope.row.url)">预览</el-button>
+        </template>
+      </el-table-column>
       <el-table-column label="下载">
         <template slot-scope="scope">
           <el-button type="primary" @click="download(scope.row.url)">下载</el-button>
@@ -35,10 +42,11 @@
       </el-table-column>
       <el-table-column label="启用">
         <template slot-scope="scope">
-          <el-switch v-model="scope.row.enable" active-color="#13ce66" inactive-color="#ccc" @change="changeEnable(scope.row)"></el-switch>
+          <el-switch v-model="scope.row.enable" active-color="#13ce66" inactive-color="#ccc"
+                     @change="changeEnable(scope.row)"></el-switch>
         </template>
       </el-table-column>
-      <el-table-column label="操作"  width="200" align="center">
+      <el-table-column label="操作" width="200" align="center">
         <template slot-scope="scope">
           <el-popconfirm
               class="ml-5"
@@ -149,11 +157,15 @@ export default {
     },
     handleFileUploadSuccess(res) {
       console.log(res)
+      this.$message.success("上传成功")
       this.load()
     },
     download(url) {
       window.open(url)
-    }
+    },
+    preview(url) {
+      window.open('https://file.keking.cn/onlinePreview?url=' + encodeURIComponent(window.btoa((url))))
+    },
   }
 }
 </script>

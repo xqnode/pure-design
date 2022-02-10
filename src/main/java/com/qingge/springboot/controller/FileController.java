@@ -5,11 +5,9 @@ import cn.hutool.core.util.IdUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.crypto.SecureUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.qingge.springboot.common.Result;
 import com.qingge.springboot.entity.Files;
-import com.qingge.springboot.entity.User;
 import com.qingge.springboot.mapper.FileMapper;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
@@ -49,8 +47,7 @@ public class FileController {
         long size = file.getSize();
 
         // 定义一个文件唯一的标识码
-        String uuid = IdUtil.fastSimpleUUID();
-        String fileUUID = uuid + StrUtil.DOT + type;
+        String fileUUID = IdUtil.fastSimpleUUID() + StrUtil.DOT + type;
 
         File uploadFile = new File(fileUploadPath + fileUUID);
         // 判断配置的文件目录是否存在，若不存在则创建一个新的文件目录
@@ -60,17 +57,15 @@ public class FileController {
         }
 
         String url;
-        // 上传文件到磁盘
-        file.transferTo(uploadFile);
         // 获取文件的md5
-        String md5 = SecureUtil.md5(uploadFile);
+        String md5 = SecureUtil.md5(file.getInputStream());
         // 从数据库查询是否存在相同的记录
         Files dbFiles = getFileByMd5(md5);
         if (dbFiles != null) {
             url = dbFiles.getUrl();
-            // 由于文件已存在，所以删除刚才上传的重复文件
-            uploadFile.delete();
         } else {
+            // 上传文件到磁盘
+            file.transferTo(uploadFile);
             // 数据库若不存在重复文件，则不删除刚才上传的文件
             url = "http://localhost:9090/file/" + fileUUID;
         }
@@ -80,7 +75,7 @@ public class FileController {
         Files saveFile = new Files();
         saveFile.setName(originalFilename);
         saveFile.setType(type);
-        saveFile.setSize(size/1024);
+        saveFile.setSize(size/1024); // 单位 kb
         saveFile.setUrl(url);
         saveFile.setMd5(md5);
         fileMapper.insert(saveFile);

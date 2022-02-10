@@ -1,5 +1,6 @@
 import axios from 'axios'
 import ElementUI from 'element-ui';
+import router from "@/router";
 
 const request = axios.create({
     baseURL: 'http://localhost:9090',
@@ -40,6 +41,7 @@ request.interceptors.response.use(
                 message: res.msg,
                 type: 'error'
             });
+            router.push("/login")
         }
         return res;
     },

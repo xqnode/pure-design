@@ -31,7 +31,8 @@
 export default {
   name: "Header",
   props: {
-    collapseBtnClass: String
+    collapseBtnClass: String,
+    user: Object
   },
   computed: {
     currentPathName () {
@@ -40,7 +41,7 @@ export default {
   },
   data() {
     return {
-      user: localStorage.getItem("user") ? JSON.parse(localStorage.getItem("user")) : {}
+
     }
   },
   methods: {
