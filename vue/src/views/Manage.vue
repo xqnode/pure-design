@@ -58,11 +58,13 @@ export default {
     },
     getUser() {
       let username = localStorage.getItem("user") ? JSON.parse(localStorage.getItem("user")).username : ""
-      // 从后台获取User数据
-      this.request.get("/user/username/" + username).then(res => {
-        // 重新赋值后台的最新User数据
-        this.user = res.data
-      })
+      if (username) {
+        // 从后台获取User数据
+        this.request.get("/user/username/" + username).then(res => {
+          // 重新赋值后台的最新User数据
+          this.user = res.data
+        })
+      }
     }
   }
 }
