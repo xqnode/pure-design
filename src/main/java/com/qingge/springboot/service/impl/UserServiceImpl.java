@@ -5,6 +5,7 @@ import cn.hutool.log.Log;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.qingge.springboot.common.Constants;
 import com.qingge.springboot.controller.dto.UserDTO;
+import com.qingge.springboot.controller.dto.UserPasswordDTO;
 import com.qingge.springboot.entity.Menu;
 import com.qingge.springboot.entity.User;
 import com.qingge.springboot.exception.ServiceException;
@@ -15,6 +16,7 @@ import com.qingge.springboot.service.IMenuService;
 import com.qingge.springboot.service.IUserService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.qingge.springboot.utils.TokenUtils;
+import org.apache.xmlbeans.impl.xb.ltgfmt.Code;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -34,6 +36,9 @@ import java.util.List;
 public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IUserService {
 
     private static final Log LOG = Log.get();
+
+    @Resource
+    private UserMapper userMapper;
 
     @Resource
     private RoleMapper roleMapper;
@@ -74,6 +79,14 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
             throw new ServiceException(Constants.CODE_600, "用户已存在");
         }
         return one;
+    }
+
+    @Override
+    public void updatePassword(UserPasswordDTO userPasswordDTO) {
+        int update = userMapper.updatePassword(userPasswordDTO);
+        if (update < 1) {
+            throw new ServiceException(Constants.CODE_600, "密码错误");
+        }
     }
 
     private User getUserInfo(UserDTO userDTO) {

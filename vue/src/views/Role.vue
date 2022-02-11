@@ -104,7 +104,7 @@
 
 <script>
 export default {
-  name: "User",
+  name: "Role",
   data() {
     return {
       tableData: [],
@@ -123,7 +123,8 @@ export default {
       expends: [],
       checks: [],
       roleId: 0,
-      roleFlag: ''
+      roleFlag: '',
+      ids: []
     }
   },
   created() {
@@ -140,6 +141,10 @@ export default {
       }).then(res => {
         this.tableData = res.data.records
         this.total = res.data.total
+      })
+
+      this.request.get("/menu/ids").then(r => {
+        this.ids = r.data
       })
 
     },
@@ -217,7 +222,7 @@ export default {
       this.pageNum = pageNum
       this.load()
     },
-    selectMenu(role) {
+    async selectMenu(role) {
       this.roleId = role.id
       this.roleFlag = role.flag
 
@@ -231,16 +236,10 @@ export default {
 
       this.request.get("/role/roleMenu/" + this.roleId).then(res => {
         this.checks = res.data
-
-        this.request.get("/menu/ids").then(r => {
-          const ids = r.data
-          ids.forEach(id => {
-            if (!this.checks.includes(id)) {
-              this.$refs.tree.setChecked(id, false)
-            }
-          })
-
-
+        this.ids.forEach(id => {
+          if (!this.checks.includes(id)) {
+            this.$refs.tree.setChecked(id, false)
+          }
         })
         this.menuDialogVis = true
       })

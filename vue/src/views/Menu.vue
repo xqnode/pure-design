@@ -9,7 +9,7 @@
     </div>
 
     <div style="margin: 10px 0">
-      <el-button type="primary" @click="handleAdd">新增 <i class="el-icon-circle-plus-outline"></i></el-button>
+      <el-button type="primary" @click="handleAdd(null)">新增 <i class="el-icon-circle-plus-outline"></i></el-button>
       <el-popconfirm
           class="ml-5"
           confirm-button-text='确定'
@@ -40,6 +40,7 @@
         </template>
       </el-table-column>
       <el-table-column prop="description" label="描述"></el-table-column>
+      <el-table-column prop="sortNum" label="顺序"></el-table-column>
       <el-table-column label="操作"  width="300" align="center">
         <template slot-scope="scope">
           <el-button type="primary" @click="handleAdd(scope.row.id)" v-if="!scope.row.pid && !scope.row.path">新增子菜单 <i class="el-icon-plus"></i></el-button>
@@ -77,6 +78,9 @@
             </el-option>
           </el-select>
         </el-form-item>
+        <el-form-item label="顺序">
+          <el-input v-model="form.sortNum" autocomplete="off"></el-input>
+        </el-form-item>
         <el-form-item label="描述">
           <el-input v-model="form.description" autocomplete="off"></el-input>
         </el-form-item>
@@ -91,7 +95,7 @@
 
 <script>
 export default {
-  name: "User",
+  name: "Menu",
   data() {
     return {
       tableData: [],
@@ -117,6 +121,11 @@ export default {
       }).then(res => {
         this.tableData = res.data
       })
+
+      // 请求图标的数据
+      this.request.get("/menu/icons").then(res => {
+        this.options = res.data
+      })
     },
     save() {
       this.request.post("/menu", this.form).then(res => {
@@ -139,11 +148,6 @@ export default {
     handleEdit(row) {
       this.form = JSON.parse(JSON.stringify(row))
       this.dialogFormVisible = true
-
-      // 请求图标的数据
-      this.request.get("/menu/icons").then(res => {
-        this.options = res.data
-      })
     },
     del(id) {
       this.request.delete("/menu/" + id).then(res => {

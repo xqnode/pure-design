@@ -6,6 +6,7 @@ import cn.hutool.core.date.Quarter;
 import com.qingge.springboot.common.Result;
 import com.qingge.springboot.entity.User;
 import com.qingge.springboot.service.IUserService;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

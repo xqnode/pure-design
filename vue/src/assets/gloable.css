@@ -4,6 +4,7 @@
     box-sizing: border-box;
 }
 
+
 .ml-5 {
     margin-left: 5px;
 }
@@ -12,6 +13,9 @@
 }
 .pd-10 {
     padding: 10px 0;
+}
+.m-10 {
+    margin: 10px 0;
 }
 
 a {

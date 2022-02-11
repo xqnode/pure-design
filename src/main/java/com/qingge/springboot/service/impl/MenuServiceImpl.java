@@ -25,6 +25,7 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements IM
     @Override
     public List<Menu> findMenus(String name) {
         QueryWrapper<Menu> queryWrapper = new QueryWrapper<>();
+        queryWrapper.orderByAsc("sort_num");
         if (StrUtil.isNotBlank(name)) {
             queryWrapper.like("name", name);
         }

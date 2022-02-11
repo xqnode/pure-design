@@ -11,8 +11,10 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.qingge.springboot.common.Constants;
 import com.qingge.springboot.common.Result;
 import com.qingge.springboot.controller.dto.UserDTO;
+import com.qingge.springboot.controller.dto.UserPasswordDTO;
 import com.qingge.springboot.entity.User;
 import com.qingge.springboot.service.IUserService;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -69,6 +71,17 @@ public class UserController {
         return Result.success(userService.saveOrUpdate(user));
     }
 
+    /**
+     * 修改密码
+     * @param userPasswordDTO
+     * @return
+     */
+    @PostMapping("/password")
+    public Result password(@RequestBody UserPasswordDTO userPasswordDTO) {
+        userService.updatePassword(userPasswordDTO);
+        return Result.success();
+    }
+
     @DeleteMapping("/{id}")
     public Result delete(@PathVariable Integer id) {
         return Result.success(userService.removeById(id));
@@ -90,7 +103,7 @@ public class UserController {
     }
 
     @GetMapping("/username/{username}")
-    public Result findOne(@PathVariable String username) {
+    public Result findByUsername(@PathVariable String username) {
         QueryWrapper<User> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("username", username);
         return Result.success(userService.getOne(queryWrapper));
