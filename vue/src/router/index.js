@@ -16,7 +16,7 @@ const routes = [
     component: () => import('../views/Register.vue')
   },
   {
-    path: '*',
+    path: '/404',
     name: '404',
     component: () => import('../views/404.vue')
   },
@@ -69,7 +69,16 @@ setRoutes()
 router.beforeEach((to, from, next) => {
   localStorage.setItem("currentPathName", to.name)  // 设置当前的路由名称
   store.commit("setPath")
-  next()
+  if (!to.matched.length) {
+    const menus = localStorage.getItem("menus")
+    if (!menus) {
+      next("/login")
+    } else {
+      next("/404")
+    }
+  } else {
+    next()
+  }
 })
 
 export default router
