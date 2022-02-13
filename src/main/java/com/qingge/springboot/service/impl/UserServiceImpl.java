@@ -4,6 +4,7 @@ import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.log.Log;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.qingge.springboot.common.Constants;
+import com.qingge.springboot.common.RoleEnum;
 import com.qingge.springboot.controller.dto.UserDTO;
 import com.qingge.springboot.controller.dto.UserPasswordDTO;
 import com.qingge.springboot.entity.Menu;
@@ -74,6 +75,8 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         if (one == null) {
             one = new User();
             BeanUtil.copyProperties(userDTO, one, true);
+            // 默认一个普通用户的角色
+            one.setRole(RoleEnum.ROLE_USER.toString());
             save(one);  // 把 copy完之后的用户对象存储到数据库
         } else {
             throw new ServiceException(Constants.CODE_600, "用户已存在");
