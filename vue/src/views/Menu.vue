@@ -94,6 +94,8 @@
 </template>
 
 <script>
+import {serverIp} from "../../public/config";
+
 export default {
   name: "Menu",
   data() {
@@ -189,7 +191,7 @@ export default {
       this.load()
     },
     exp() {
-      window.open("http://localhost:9090/role/export")
+      window.open(`http://${serverIp}:9090/role/export`)
     },
     handleExcelImportSuccess() {
       this.$message.success("导入成功")
