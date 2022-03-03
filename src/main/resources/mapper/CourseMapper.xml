@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qingge.springboot.mapper.CourseMapper">
+
+    <delete id="deleteStudentCourse">
+        delete from student_course where student_id = #{studentId} and course_id = #{courseId}
+    </delete>
+
+    <insert id="setStudentCourse">
+        insert into student_course(student_id, course_id) values(#{studentId}, #{courseId})
+    </insert>
+
+    <select id="findPage" resultType="com.qingge.springboot.entity.Course">
+        select course.*, sys_user.nickname as teacher  from course
+        left join sys_user
+        on course.teacher_id = sys_user.id
+        <where>
+            <if test="name != null and name != ''">
+                and name like concat('%', #{name},'%')
+            </if>
+        </where>
+    </select>
+</mapper>
