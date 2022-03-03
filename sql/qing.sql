@@ -11,11 +11,48 @@
  Target Server Version : 50721
  File Encoding         : 65001
 
- Date: 12/02/2022 11:02:36
+ Date: 03/03/2022 21:46:32
 */
 
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
+
+-- ----------------------------
+-- Table structure for course
+-- ----------------------------
+DROP TABLE IF EXISTS `course`;
+CREATE TABLE `course`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT '课程名称',
+  `score` int(11) NULL DEFAULT NULL COMMENT '学分',
+  `times` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT '上课时间',
+  `state` tinyint(1) NULL DEFAULT NULL COMMENT '是否开课',
+  `teacher_id` int(11) NULL DEFAULT NULL COMMENT '授课老师id',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of course
+-- ----------------------------
+INSERT INTO `course` VALUES (1, '大学物理', 10, '40', 0, 17);
+INSERT INTO `course` VALUES (2, '高等数学', 10, '45', NULL, 16);
+INSERT INTO `course` VALUES (3, '大学英语', 10, '30', NULL, 16);
+
+-- ----------------------------
+-- Table structure for student_course
+-- ----------------------------
+DROP TABLE IF EXISTS `student_course`;
+CREATE TABLE `student_course`  (
+  `student_id` int(11) NOT NULL,
+  `course_id` int(11) NOT NULL,
+  PRIMARY KEY (`student_id`, `course_id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of student_course
+-- ----------------------------
+INSERT INTO `student_course` VALUES (28, 1);
+INSERT INTO `student_course` VALUES (28, 2);
 
 -- ----------------------------
 -- Table structure for sys_dict
@@ -53,7 +90,7 @@ CREATE TABLE `sys_file`  (
   `is_delete` tinyint(1) NULL DEFAULT 0 COMMENT '是否删除',
   `enable` tinyint(1) NULL DEFAULT 1 COMMENT '是否禁用链接',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 31 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 37 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_file
@@ -73,6 +110,12 @@ INSERT INTO `sys_file` VALUES (27, '9b21a2b133b140e0bcd9bf66dc5cad1d.jpg', 'jpg'
 INSERT INTO `sys_file` VALUES (28, '1622011842830-5.jpg', 'jpg', 14, 'http://localhost:9090/file/7737484487db47ab89e58504ddf86ac1.jpg', '2dcd5d60c696c47fdfe0b482c18de0ea', 0, 1);
 INSERT INTO `sys_file` VALUES (29, '1641024983532cf (1).png', 'png', 634, 'http://localhost:9090/file/8d966b0e6cf84fe191a72a58b8293b23.png', 'e1a9407cd0e937c4b411a93b7aca7c87', 0, 1);
 INSERT INTO `sys_file` VALUES (30, '1622011842830-5.jpg', 'jpg', 14, 'http://localhost:9090/file/7737484487db47ab89e58504ddf86ac1.jpg', '2dcd5d60c696c47fdfe0b482c18de0ea', 0, 1);
+INSERT INTO `sys_file` VALUES (31, 'QQ截图20211214232106.jpg', 'jpg', 30, 'http://localhost:9090/file/7de0e50f915547539db12023cf997276.jpg', 'ba5dd263551a31d9bb0582b07cb480e1', 0, 1);
+INSERT INTO `sys_file` VALUES (32, 'boot.jpg', 'jpg', 11, 'http://localhost:9090/file/657d7054d7864bd7a0aaba9e44f7924e.jpg', '2ab82ad78ff081665ee90f8cb38b45db', 0, 1);
+INSERT INTO `sys_file` VALUES (33, 'QQ图片20210828212629.gif', 'gif', 188, 'http://localhost:9090/file/e5512c68a5614135a12064afa66c67e5.gif', 'ce524058758a83c046b97c66ddcb8a83', 0, 1);
+INSERT INTO `sys_file` VALUES (34, 'vite.jpg', 'jpg', 27, 'http://localhost:9090/file/782f20b37b8b4a158c5e13a07fe826d5.jpg', 'c67bab9c32968cd0cda3e1608286b0d9', 0, 1);
+INSERT INTO `sys_file` VALUES (35, 'mp.jpg', 'jpg', 32, 'http://localhost:9090/file/650e8330e78b4fed8fb0c1d866684b5d.jpg', 'cb887a9d64563352edce80cf50296cc5', 0, 1);
+INSERT INTO `sys_file` VALUES (36, 'qq音乐.png', 'png', 445, 'http://localhost:9090/file/461504596ec040729776b674ddec88d3.png', '793fd534fa705475eb3358f68c87ec68', 0, 1);
 
 -- ----------------------------
 -- Table structure for sys_menu
@@ -88,7 +131,7 @@ CREATE TABLE `sys_menu`  (
   `page_path` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT '页面路径',
   `sort_num` int(11) NULL DEFAULT NULL COMMENT '排序',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 11 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 40 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_menu
@@ -101,6 +144,7 @@ INSERT INTO `sys_menu` VALUES (7, '菜单管理', '/menu', 'el-icon-menu', NULL,
 INSERT INTO `sys_menu` VALUES (8, '文件管理', '/file', 'el-icon-document', NULL, 4, 'File', 304);
 INSERT INTO `sys_menu` VALUES (9, '请作者喝杯咖啡', '/donate', 'el-icon-coffee\r\n', NULL, NULL, 'Donate', 200);
 INSERT INTO `sys_menu` VALUES (10, '主页', '/home', 'el-icon-house', NULL, NULL, 'Home', 0);
+INSERT INTO `sys_menu` VALUES (39, '课程管理', '/course', 'el-icon-menu', NULL, NULL, 'Course', 201);
 
 -- ----------------------------
 -- Table structure for sys_role
@@ -112,13 +156,14 @@ CREATE TABLE `sys_role`  (
   `description` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT '描述',
   `flag` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT '唯一标识',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_role
 -- ----------------------------
 INSERT INTO `sys_role` VALUES (1, '管理员', '管理员', 'ROLE_ADMIN');
-INSERT INTO `sys_role` VALUES (2, '普通用户', '普通用户', 'ROLE_USER');
+INSERT INTO `sys_role` VALUES (2, '学生', '学生', 'ROLE_STUDENT');
+INSERT INTO `sys_role` VALUES (3, '老师', '老师', 'ROLE_TEACHER');
 
 -- ----------------------------
 -- Table structure for sys_role_menu
@@ -141,8 +186,10 @@ INSERT INTO `sys_role_menu` VALUES (1, 7);
 INSERT INTO `sys_role_menu` VALUES (1, 8);
 INSERT INTO `sys_role_menu` VALUES (1, 9);
 INSERT INTO `sys_role_menu` VALUES (1, 10);
+INSERT INTO `sys_role_menu` VALUES (1, 39);
 INSERT INTO `sys_role_menu` VALUES (2, 9);
 INSERT INTO `sys_role_menu` VALUES (2, 10);
+INSERT INTO `sys_role_menu` VALUES (2, 39);
 
 -- ----------------------------
 -- Table structure for sys_user
@@ -166,14 +213,14 @@ CREATE TABLE `sys_user`  (
 -- Records of sys_user
 -- ----------------------------
 INSERT INTO `sys_user` VALUES (1, 'admin', 'admin', '程序员青戈', 'admin@qq.com', '13988997788', '安徽合肥1', '2022-01-22 21:10:27', 'http://localhost:9090/file/8d966b0e6cf84fe191a72a58b8293b23.png', 'ROLE_ADMIN');
-INSERT INTO `sys_user` VALUES (16, '2', NULL, '甄姬', '2', '2', '2', '2022-02-26 22:10:14', NULL, 'ROLE_USER');
-INSERT INTO `sys_user` VALUES (17, '333', '123', '我是三三', '3', '3', '3', '2022-02-26 22:10:18', 'http://localhost:9090/file/7737484487db47ab89e58504ddf86ac1.jpg', 'ROLE_USER');
+INSERT INTO `sys_user` VALUES (16, '222', NULL, '甄姬好大', '2', '2', '2', '2022-02-26 22:10:14', NULL, 'ROLE_TEACHER');
+INSERT INTO `sys_user` VALUES (17, '333', '123', '我是三三哦豁', '3', '3', '3', '2022-02-26 22:10:18', 'http://localhost:9090/file/7737484487db47ab89e58504ddf86ac1.jpg', 'ROLE_TEACHER');
 INSERT INTO `sys_user` VALUES (18, 'nz', '123', '哪吒', '2', '2', '2', '2022-03-29 16:59:44', '', NULL);
 INSERT INTO `sys_user` VALUES (19, 'ys', '123', '亚瑟', '3', '3', '3', '2022-04-29 16:59:44', '', NULL);
 INSERT INTO `sys_user` VALUES (20, 'lx', '123', '李信', '2', '2', '2', '2022-05-29 17:12:04', '2', NULL);
 INSERT INTO `sys_user` VALUES (25, 'sir', '123', '安琪拉', NULL, NULL, NULL, '2022-06-08 17:00:47', NULL, NULL);
 INSERT INTO `sys_user` VALUES (26, 'err', NULL, '妲己', '11', '1', '1', '2022-07-08 17:20:01', NULL, NULL);
-INSERT INTO `sys_user` VALUES (28, 'ddd', '123', 'ddd', '', '', '', '2022-11-09 10:41:07', '', 'ROLE_USER');
-INSERT INTO `sys_user` VALUES (29, 'ffff', '123', NULL, NULL, NULL, NULL, '2022-12-10 11:53:31', NULL, 'ROLE_USER');
+INSERT INTO `sys_user` VALUES (28, 'ddd', '123', 'ddd', '', '', '', '2022-11-09 10:41:07', '', 'ROLE_STUDENT');
+INSERT INTO `sys_user` VALUES (29, 'ffff', '123', NULL, NULL, NULL, NULL, '2022-12-10 11:53:31', NULL, 'ROLE_STUDENT');
 
 SET FOREIGN_KEY_CHECKS = 1;

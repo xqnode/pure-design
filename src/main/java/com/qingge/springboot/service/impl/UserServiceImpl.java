@@ -3,6 +3,7 @@ package com.qingge.springboot.service.impl;
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.log.Log;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.qingge.springboot.common.Constants;
 import com.qingge.springboot.common.RoleEnum;
 import com.qingge.springboot.controller.dto.UserDTO;
@@ -90,6 +91,11 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         if (update < 1) {
             throw new ServiceException(Constants.CODE_600, "密码错误");
         }
+    }
+
+    @Override
+    public Page<User> findPage(Page<User> page, String username, String email, String address) {
+        return userMapper.findPage(page, username, email, address);
     }
 
     private User getUserInfo(UserDTO userDTO) {
