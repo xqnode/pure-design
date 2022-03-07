@@ -20,6 +20,33 @@ const routes = [
     name: '404',
     component: () => import('../views/404.vue')
   },
+  {
+    path: '/front',
+    name: 'Front',
+    component: () => import('../views/front/Front'),
+    children: [
+      {
+        path: 'home',
+        name: 'FrontHome',
+        component: () => import('../views/front/Home.vue')
+      },
+      {
+        path: 'item1',
+        name: 'Item1',
+        component: () => import('../views/front/Item1.vue')
+      },
+      {
+        path: 'person',
+        name: 'FrontPerson',
+        component: () => import('../views/front/Person')
+      },
+      {
+        path: 'password',
+        name: 'FrontPassword',
+        component: () => import('../views/front/Password')
+      },
+    ]
+  },
 ]
 
 const router = new VueRouter({
