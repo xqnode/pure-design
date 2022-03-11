@@ -3,13 +3,21 @@ package com.qingge.springboot.controller;
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.date.Quarter;
+import cn.hutool.core.lang.TypeReference;
+import cn.hutool.core.util.StrUtil;
+import cn.hutool.json.JSONUtil;
+import com.qingge.springboot.common.Constants;
 import com.qingge.springboot.common.Result;
 import com.qingge.springboot.config.AuthAccess;
+import com.qingge.springboot.entity.Files;
 import com.qingge.springboot.entity.User;
 import com.qingge.springboot.mapper.FileMapper;
 import com.qingge.springboot.service.IUserService;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -29,6 +37,9 @@ public class EchartsController {
 
     @Resource
     private FileMapper fileMapper;
+
+    @Autowired
+    private StringRedisTemplate stringRedisTemplate;
 
     @GetMapping("/example")
     public Result get() {
@@ -61,8 +72,22 @@ public class EchartsController {
 
     @AuthAccess
     @GetMapping("/file/front/all")
+//    @Cacheable(value = "files" ,key = "'frontAll'")
     public Result frontAll() {
-        return Result.success(fileMapper.selectList(null));
+        // 1. 从缓存获取数据
+        String jsonStr = stringRedisTemplate.opsForValue().get(Constants.FILES_KEY);
+        List<Files> files;
+        if (StrUtil.isBlank(jsonStr)) {  // 2. 取出来的json是空的
+            files = fileMapper.selectList(null);  // 3. 从数据库取出数据
+            // 4. 再去缓存到redis
+            stringRedisTemplate.opsForValue().set(Constants.FILES_KEY, JSONUtil.toJsonStr(files));
+        } else {
+            // 减轻数据库的压力
+            // 5. 如果有, 从redis缓存中获取数据
+            files = JSONUtil.toBean(jsonStr, new TypeReference<List<Files>>() {
+            }, true);
+        }
+        return Result.success(files);
     }
 
 }

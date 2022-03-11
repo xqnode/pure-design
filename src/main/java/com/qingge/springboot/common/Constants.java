@@ -10,4 +10,6 @@ public interface Constants {
 
     String DICT_TYPE_ICON = "icon";
 
+    String FILES_KEY = "FILES_FRONT_ALL";
+
 }

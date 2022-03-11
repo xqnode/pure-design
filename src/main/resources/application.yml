@@ -8,6 +8,10 @@ spring:
     url: jdbc:mysql://localhost:3306/qing?serverTimezone=GMT%2b8
     username: root
     password: 123456
+  redis:
+    host: 127.0.0.1
+    port: 6379
+
 mybatis:
   mapper-locations: classpath:mapper/*.xml  #扫描所有mybatis的xml文件
 #  configuration:
