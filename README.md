@@ -4,9 +4,10 @@
 
 SpringBoot2 + Vue2 + ElementUI + Axios + Hutool + Mysql
 
-## 交流QQ群
+## 微信公众号：Java学习指南
 
- **529910361** 
+关注公众号，回复【518】，获取项目所有配套资料和软件~
+
 
 ## B站视频（程序员青戈）
 
