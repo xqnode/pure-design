@@ -157,6 +157,11 @@ public class FileController {
         return Result.success();
     }
 
+    @GetMapping("/detail/{id}")
+    public Result getById(@PathVariable Integer id) {
+        return Result.success(fileMapper.selectById(id));
+    }
+
     //清除一条缓存，key为要清空的数据
 //    @CacheEvict(value="files",key="'frontAll'")
     @DeleteMapping("/{id}")

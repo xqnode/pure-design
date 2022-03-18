@@ -45,6 +45,16 @@ const routes = [
         name: 'FrontPassword',
         component: () => import('../views/front/Password')
       },
+      {
+        path: 'video',
+        name: 'Video',
+        component: () => import('../views/front/Video')
+      },
+      {
+        path: 'videoDetail',
+        name: 'VideoDetail',
+        component: () => import('../views/front/VideoDetail')
+      },
     ]
   },
 ]
