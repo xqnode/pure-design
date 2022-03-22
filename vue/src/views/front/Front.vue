@@ -31,6 +31,7 @@
         <el-menu :default-active="'1'" class="el-menu-demo" mode="horizontal" router>
           <el-menu-item index="/front/home">首页</el-menu-item>
           <el-menu-item index="/front/video">视频播放</el-menu-item>
+          <el-menu-item index="/front/article">文章列表</el-menu-item>
           <el-submenu index="2">
             <template slot="title">我的工作台</template>
             <el-menu-item index="/front/item1">选项1</el-menu-item>

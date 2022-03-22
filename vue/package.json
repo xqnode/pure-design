@@ -11,6 +11,7 @@
     "core-js": "^3.6.5",
     "echarts": "^5.3.0",
     "element-ui": "^2.15.6",
+    "mavon-editor": "^2.10.4",
     "video.js": "^7.18.1",
     "vue": "^2.6.11",
     "vue-router": "^3.2.0",
