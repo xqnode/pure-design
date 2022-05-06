@@ -6,7 +6,9 @@
     <el-card>
       青哥出手，马上拥有
       <el-divider />
-      虎虎生威，虎年大吉
+      B站所有的付费笔记、源码、代码生成器、成品项目等都打包在VIP群<br><br>
+      5.5 - 5.31 活动价永久VIP打6折仅需 66 元，机不可失，时不再来！<br><br>
+      如果需要可以加我钉钉：xiaqing1993，微信：xia_qing2012
     </el-card>
     <div style="height: 1px; background: #ddd; margin: 20px 0"/>
 
