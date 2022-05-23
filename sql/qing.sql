@@ -11,7 +11,7 @@
  Target Server Version : 50737
  File Encoding         : 65001
 
- Date: 23/05/2022 11:43:22
+ Date: 23/05/2022 18:00:32
 */
 
 SET NAMES utf8mb4;
@@ -266,21 +266,22 @@ CREATE TABLE `sys_user`  (
   `avatar_url` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT '头像',
   `role` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT '角色',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 30 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 31 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_user
 -- ----------------------------
-INSERT INTO `sys_user` VALUES (1, 'admin', 'admin', '程序员青戈', 'admin@qq.com', '13988997788', '安徽合肥1', '2022-01-22 21:10:27', 'http://localhost:9090/file/8d966b0e6cf84fe191a72a58b8293b23.png', 'ROLE_ADMIN');
-INSERT INTO `sys_user` VALUES (16, '222', '123', '甄姬好大', '2', '2', '2', '2022-02-26 22:10:14', NULL, 'ROLE_TEACHER');
-INSERT INTO `sys_user` VALUES (17, '333', '123', '我是三三哦豁', '3', '3', '3', '2022-02-26 22:10:18', 'http://localhost:9090/file/7737484487db47ab89e58504ddf86ac1.jpg', 'ROLE_TEACHER');
-INSERT INTO `sys_user` VALUES (18, 'nzz', '123', '哪吒', '2', '2', '2', '2022-03-29 16:59:44', '', 'ROLE_STUDENT');
-INSERT INTO `sys_user` VALUES (19, 'yss', '123', '亚瑟', '3', '3', '3', '2022-04-29 16:59:44', '', 'ROLE_STUDENT');
-INSERT INTO `sys_user` VALUES (20, 'lxx', '123', '李信', '2', '2', '2', '2022-05-29 17:12:04', '2', 'ROLE_STUDENT');
-INSERT INTO `sys_user` VALUES (25, 'sir', '123', '安琪拉', NULL, NULL, NULL, '2022-06-08 17:00:47', NULL, 'ROLE_STUDENT');
-INSERT INTO `sys_user` VALUES (26, 'err', NULL, '妲己', '11', '1', '1', '2022-07-08 17:20:01', NULL, 'ROLE_STUDENT');
-INSERT INTO `sys_user` VALUES (28, 'ddd', '123', 'ddd', '', '', '', '2022-11-09 10:41:07', 'http://localhost:9090/file/7de0e50f915547539db12023cf997276.jpg', 'ROLE_STUDENT');
-INSERT INTO `sys_user` VALUES (29, 'ffff', '123', NULL, NULL, NULL, NULL, '2022-12-10 11:53:31', NULL, 'ROLE_STUDENT');
+INSERT INTO `sys_user` VALUES (1, 'admin', '21232f297a57a5a743894a0e4a801fc3', '程序员青戈', 'admin@qq.com', '13988997788', '安徽合肥1', '2022-01-22 21:10:27', 'http://localhost:9090/file/8d966b0e6cf84fe191a72a58b8293b23.png', 'ROLE_ADMIN');
+INSERT INTO `sys_user` VALUES (16, '222', '202cb962ac59075b964b07152d234b70', '甄姬好大', '2', '2', '2', '2022-02-26 22:10:14', NULL, 'ROLE_TEACHER');
+INSERT INTO `sys_user` VALUES (17, '333', '202cb962ac59075b964b07152d234b70', '我是三三哦豁', '3', '3', '3', '2022-02-26 22:10:18', 'http://localhost:9090/file/7737484487db47ab89e58504ddf86ac1.jpg', 'ROLE_TEACHER');
+INSERT INTO `sys_user` VALUES (18, 'nzz', '202cb962ac59075b964b07152d234b70', '哪吒', '2', '2', '2', '2022-03-29 16:59:44', '', 'ROLE_STUDENT');
+INSERT INTO `sys_user` VALUES (19, 'yss', '202cb962ac59075b964b07152d234b70', '亚瑟', '3', '3', '3', '2022-04-29 16:59:44', '', 'ROLE_STUDENT');
+INSERT INTO `sys_user` VALUES (20, 'lxx', '202cb962ac59075b964b07152d234b70', '李信', '2', '2', '2', '2022-05-29 17:12:04', '2', 'ROLE_STUDENT');
+INSERT INTO `sys_user` VALUES (25, 'sir', '202cb962ac59075b964b07152d234b70', '安琪拉', NULL, NULL, NULL, '2022-06-08 17:00:47', NULL, 'ROLE_STUDENT');
+INSERT INTO `sys_user` VALUES (26, 'err', '202cb962ac59075b964b07152d234b70', '妲己', '11', '1', '1', '2022-07-08 17:20:01', NULL, 'ROLE_STUDENT');
+INSERT INTO `sys_user` VALUES (28, 'ddd', '202cb962ac59075b964b07152d234b70', 'ddd', '', '', '', '2022-11-09 10:41:07', 'http://localhost:9090/file/7de0e50f915547539db12023cf997276.jpg', 'ROLE_STUDENT');
+INSERT INTO `sys_user` VALUES (29, 'ffff', '202cb962ac59075b964b07152d234b70', 'ffff', NULL, NULL, NULL, '2022-12-10 11:53:31', NULL, 'ROLE_STUDENT');
+INSERT INTO `sys_user` VALUES (30, 'xiaobai', '202cb962ac59075b964b07152d234b70', 'xiaobai', NULL, NULL, NULL, '2022-05-23 14:43:08', NULL, 'ROLE_STUDENT');
 
 -- ----------------------------
 -- Table structure for t_comment
