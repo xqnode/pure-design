@@ -1,6 +1,7 @@
 package com.qingge.springboot.service.impl;
 
 import cn.hutool.core.bean.BeanUtil;
+import cn.hutool.crypto.SecureUtil;
 import cn.hutool.log.Log;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -53,6 +54,8 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
 
     @Override
     public UserDTO login(UserDTO userDTO) {
+        // 用户密码 md5加密
+        userDTO.setPassword(SecureUtil.md5(userDTO.getPassword()));
         User one = getUserInfo(userDTO);
         if (one != null) {
             BeanUtil.copyProperties(one, userDTO, true);
@@ -72,12 +75,17 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
 
     @Override
     public User register(UserDTO userDTO) {
+        // 用户密码 md5加密
+        userDTO.setPassword(SecureUtil.md5(userDTO.getPassword()));
         User one = getUserInfo(userDTO);
         if (one == null) {
             one = new User();
             BeanUtil.copyProperties(userDTO, one, true);
             // 默认一个普通用户的角色
-            one.setRole(RoleEnum.ROLE_USER.toString());
+            one.setRole(RoleEnum.ROLE_STUDENT.toString());
+            if (one.getNickname() == null) {
+                one.setNickname(one.getUsername());
+            }
             save(one);  // 把 copy完之后的用户对象存储到数据库
         } else {
             throw new ServiceException(Constants.CODE_600, "用户已存在");

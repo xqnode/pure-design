@@ -3,6 +3,7 @@ package com.qingge.springboot.controller;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.StrUtil;
+import cn.hutool.crypto.SecureUtil;
 import cn.hutool.poi.excel.ExcelReader;
 import cn.hutool.poi.excel.ExcelUtil;
 import cn.hutool.poi.excel.ExcelWriter;
@@ -69,7 +70,7 @@ public class UserController {
     @PostMapping
     public Result save(@RequestBody User user) {
         if (user.getId() == null && user.getPassword() == null) {  // 新增用户默认密码
-            user.setPassword("123");
+            user.setPassword( SecureUtil.md5("123"));
         }
         return Result.success(userService.saveOrUpdate(user));
     }
@@ -81,6 +82,8 @@ public class UserController {
      */
     @PostMapping("/password")
     public Result password(@RequestBody UserPasswordDTO userPasswordDTO) {
+        userPasswordDTO.setPassword(SecureUtil.md5(userPasswordDTO.getPassword()));
+        userPasswordDTO.setNewPassword(SecureUtil.md5(userPasswordDTO.getNewPassword()));
         userService.updatePassword(userPasswordDTO);
         return Result.success();
     }
