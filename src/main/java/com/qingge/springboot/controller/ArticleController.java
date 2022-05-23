@@ -57,8 +57,18 @@ public class ArticleController {
     }
 
     @GetMapping
-    public Result findAll() {
-        return Result.success(articleService.list());
+    public Result findAll(@RequestParam(required = false) String start, @RequestParam(required = false) String end) {
+        QueryWrapper<Article> queryWrapper = new QueryWrapper<>();
+
+        if (StrUtil.isNotBlank(start)) {
+            // where time >= start
+            queryWrapper.ge("time", start);
+        }
+        if (StrUtil.isNotBlank(end)) {
+            // where time <= end
+            queryWrapper.le("time", end);
+        }
+        return Result.success(articleService.list(queryWrapper));
     }
 
     @GetMapping("/{id}")

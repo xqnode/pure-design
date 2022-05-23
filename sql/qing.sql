@@ -3,15 +3,15 @@
 
  Source Server         : localhost_3306
  Source Server Type    : MySQL
- Source Server Version : 50721
+ Source Server Version : 50737
  Source Host           : localhost:3306
  Source Schema         : qing
 
  Target Server Type    : MySQL
- Target Server Version : 50721
+ Target Server Version : 50737
  File Encoding         : 65001
 
- Date: 22/03/2022 21:57:43
+ Date: 23/05/2022 11:43:22
 */
 
 SET NAMES utf8mb4;
@@ -33,8 +33,34 @@ CREATE TABLE `article`  (
 -- ----------------------------
 -- Records of article
 -- ----------------------------
-INSERT INTO `article` VALUES (1, '青哥哥的文章标题', '# 我是青哥哥\n## 我是青哥哥2号\n\n::: hljs-center\n\n***++~~==我是那个哥哥==~~++***\n\n:::\n\n> 我是青哥哥的引用\n\n我是B站：程序员青戈\n\n[百度](https://www.baidu.com)\n\n```java\nclass Hello {\n  public static void main(String[] args) {\n    System.out.pringln(\"Hello 青哥哥\");\n  }\n}\n\n```\n\n![搜狗截图20220129174103.png](http://localhost:9090/file/8567a00d2bf740e0a63794baf600cec3.png)\n\n\n', '程序员青戈', '2022-03-22 19:22:58');
-INSERT INTO `article` VALUES (2, '青哥哥文章2号', '青哥哥文章2号\n\n青哥哥文章2号\n\n青哥哥文章2号\n\n![QQ图片20220307194920.png](http://localhost:9090/file/5e40a867acd74d1f90b0ac9a765823e5.png)', '程序员青戈', '2022-03-22 19:22:58');
+INSERT INTO `article` VALUES (1, '青哥哥的文章标题', '# 我是青哥哥\n## 我是青哥哥2号\n\n::: hljs-center\n\n***++~~==我是那个哥哥==~~++***\n\n:::\n\n> 我是青哥哥的引用\n\n我是B站：程序员青戈\n\n[百度](https://www.baidu.com)\n\n```java\nclass Hello {\n  public static void main(String[] args) {\n    System.out.pringln(\"Hello 青哥哥\");\n  }\n}\n\n```\n\n![搜狗截图20220129174103.png](http://localhost:9090/file/8567a00d2bf740e0a63794baf600cec3.png)\n\n\n', '程序员青戈', '2022-03-20 19:22:58');
+INSERT INTO `article` VALUES (2, '青哥哥文章2号', '青哥哥文章2号\n\n青哥哥文章2号\n\n青哥哥文章2号\n\n![QQ图片20220307194920.png](http://localhost:9090/file/5e40a867acd74d1f90b0ac9a765823e5.png)', '程序员青戈', '2022-05-22 19:22:58');
+
+-- ----------------------------
+-- Table structure for building
+-- ----------------------------
+DROP TABLE IF EXISTS `building`;
+CREATE TABLE `building`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `label` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT '楼栋',
+  `value` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT '单元',
+  `pid` int(11) NULL DEFAULT NULL COMMENT '父级id',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 11 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of building
+-- ----------------------------
+INSERT INTO `building` VALUES (1, '1栋', '1栋', NULL);
+INSERT INTO `building` VALUES (2, '2栋', '2栋', NULL);
+INSERT INTO `building` VALUES (3, '1单元', '1单元', 1);
+INSERT INTO `building` VALUES (4, '2单元', '2单元', 1);
+INSERT INTO `building` VALUES (5, '1单元', '1单元', 2);
+INSERT INTO `building` VALUES (6, '2单元', '2单元', 2);
+INSERT INTO `building` VALUES (7, '101', '101', 3);
+INSERT INTO `building` VALUES (8, '201', '201', 3);
+INSERT INTO `building` VALUES (9, '101', '101', 4);
+INSERT INTO `building` VALUES (10, '201', '201', 4);
 
 -- ----------------------------
 -- Table structure for course
@@ -156,7 +182,7 @@ CREATE TABLE `sys_menu`  (
   `page_path` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT '页面路径',
   `sort_num` int(11) NULL DEFAULT NULL COMMENT '排序',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 42 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 44 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_menu
@@ -172,6 +198,8 @@ INSERT INTO `sys_menu` VALUES (10, '主页', '/home', 'el-icon-house', NULL, NUL
 INSERT INTO `sys_menu` VALUES (39, '课程管理', '/course', 'el-icon-menu', NULL, NULL, 'Course', 201);
 INSERT INTO `sys_menu` VALUES (40, '高德地图', '/map', 'el-icon-house', NULL, NULL, 'Map', 999);
 INSERT INTO `sys_menu` VALUES (41, '文章管理', '/article', 'el-icon-menu', NULL, NULL, 'Article', 999);
+INSERT INTO `sys_menu` VALUES (42, '级联查询', '/building', 'el-icon-menu', NULL, NULL, 'Building', 999);
+INSERT INTO `sys_menu` VALUES (43, '时间范围查询', '/timeSearch', 'el-icon-menu', NULL, NULL, 'TimeSearch', 999);
 
 -- ----------------------------
 -- Table structure for sys_role
@@ -216,6 +244,8 @@ INSERT INTO `sys_role_menu` VALUES (1, 10);
 INSERT INTO `sys_role_menu` VALUES (1, 39);
 INSERT INTO `sys_role_menu` VALUES (1, 40);
 INSERT INTO `sys_role_menu` VALUES (1, 41);
+INSERT INTO `sys_role_menu` VALUES (1, 42);
+INSERT INTO `sys_role_menu` VALUES (1, 43);
 INSERT INTO `sys_role_menu` VALUES (3, 2);
 INSERT INTO `sys_role_menu` VALUES (3, 10);
 INSERT INTO `sys_role_menu` VALUES (3, 39);
@@ -232,7 +262,7 @@ CREATE TABLE `sys_user`  (
   `email` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT '邮箱',
   `phone` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT '电话',
   `address` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT '地址',
-  `create_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `create_time` timestamp(0) NULL DEFAULT CURRENT_TIMESTAMP(0) COMMENT '创建时间',
   `avatar_url` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT '头像',
   `role` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT '角色',
   PRIMARY KEY (`id`) USING BTREE
