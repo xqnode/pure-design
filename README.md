@@ -2,7 +2,7 @@
 
 ## 技术栈
 
-SpringBoot2 + Vue2 + ElementUI + Axios + Hutool + Mysql
+SpringBoot2 + Vue2 + ElementUI + Axios + Hutool + Mysql + Echarts
 
 ## 微信公众号：Java学习指南
 
