@@ -1,5 +1,7 @@
 # 小白做毕设
 
+从头开始带你手写一套完整的前后端分离的管理系统，无套路，全程写代码 + 讲解知识点，全程干货
+
 ## 技术栈
 
 SpringBoot2 + Vue2 + ElementUI + Axios + Hutool + Mysql + Echarts
@@ -42,6 +44,6 @@ https://live.bilibili.com/21889562
 - 支付宝沙箱支付
 - 集成视频播放插件
 
-## 请作者喝杯咖啡
+## 交流学习
 
-<img src='https://gitee.com/xqnode/images/raw/master/imgs/微信.png' width=300 align=left>
+加QQ群：492402698
